@@ -21,7 +21,94 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <!-- Start: Form Search -->
+    <div class="container my-5">
+      <form id="form-search">
+        <div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">Search Term</div>
+            <input type="text" class="form-control" name="searchTerm" />
+          </div>
+
+          <div class="input-group mb-3">
+            <label class="input-group-text">Created At</label>
+            <select class="form-select">
+              <option selected>Choose...</option>
+              <option value="asc">Asc</option>
+              <option value="desc">Desc</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <label class="input-group-text">Status</label>
+            <select class="form-select">
+              <option selected>Choose...</option>
+              <option value="0">Not Mark</option>
+              <option value="1">Marked</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex gap-4">
+          <button type="submit" name="search" class="btn btn-success">
+            Search
+          </button>
+          <button type="reset" name="search" class="btn btn-warning">
+            Clear Search
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Start: Form Search -->
+
+    <!-- Start: ListView TODO -->
+    <div class="container">
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <p class="m-0">An item</p>
+          <div class="d-flex gap-4">
+            <input
+              class="form-check-input"
+              style="height: 2rem; width: 2rem; cursor: pointer"
+              type="checkbox"
+            />
+            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-warning">Update</button>
+          </div>
+        </li>
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <p class="m-0">An item</p>
+          <div class="d-flex gap-4">
+            <input
+              class="form-check-input"
+              style="height: 2rem; width: 2rem; cursor: pointer"
+              type="checkbox"
+            />
+            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-warning">Update</button>
+          </div>
+        </li>
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <p class="m-0">An item</p>
+          <div class="d-flex gap-4">
+            <input
+              class="form-check-input"
+              style="height: 2rem; width: 2rem; cursor: pointer"
+              type="checkbox"
+            />
+            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-warning">Update</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- End: ListView TODO -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
