@@ -13,10 +13,10 @@
 ## Feature
 
 - [x] Add todo
-- Delete todo
-- Update todo
+- [x] Delete todo
+- [x] Update todo
 - [x] Render todo
 - Search todo
-- Mark todo is done
+- [ ] Mark todo is done
 - Soft by date todo
 - Filter by done or not marked
