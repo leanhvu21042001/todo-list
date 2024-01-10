@@ -11,7 +11,7 @@ document
     const todoFound = todoList.filter((obj) => obj.content.includes(term));
 
     if (status) {
-      todoFound.filter((todo) => todo.isMarked === status);
+      todoFound.filter((todo) => todo.isMarked === Number(status));
     }
 
     if (created && created === "asc") {
