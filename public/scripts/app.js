@@ -12,5 +12,5 @@ formAdd.addEventListener('submit', function (event) {
     mark: false,
     created: Date.now().toString(),
   }]
-  
+
 });
