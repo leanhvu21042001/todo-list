@@ -81,7 +81,7 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   const formData = new FormData(event.target);
   const todoText = formData.get("todoText");
 
-  // push new todo to todoLis
+  // push new todo to todoList
   todoList = [...todoList, createTodo(todoText)];
 
   // reset form data
@@ -92,18 +92,19 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   renderTodoElements(elements);
 });
 
-var myModal = new bootstrap.Modal(document.getElementById("toDelete"), {
+const deleteModal = new bootstrap.Modal(document.getElementById("toDelete"), {
   keyboard: false,
 });
 document
   .querySelector("#deleteBtn")
   .addEventListener("click", function (event) {
-    const idDelete = document.querySelector(".toDelete").getAttribute('data-id');
+    const idDelete = document
+      .querySelector(".toDelete")
+      .getAttribute("data-id");
     const newList = removeTodo(idDelete, todoList);
     const elements = createTodoElements(newList);
-    console.log(elements)
     renderTodoElements(elements);
-    myModal.hide();
+    deleteModal.hide();
   });
 
 // ################ init render ################ //
