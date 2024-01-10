@@ -45,7 +45,7 @@
           type="button"
           class="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#modalAddNewTodo"
           id="addBtn"
         >
           Add
@@ -54,9 +54,9 @@
       <form id="formAdd">
         <div
           class="modal fade"
-          id="exampleModal"
+          id="modalAddNewTodo"
           tabindex="-1"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="modalAddNewTodoLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog">
@@ -99,7 +99,50 @@
       </form>
     </div>
 
-  
+    <!-- Start: Modal update -->
+    <div
+      class="modal fade"
+      id="modalUpdateTodo"
+      tabindex="-1"
+      aria-labelledby="modalUpdateTodoLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <form class="modal-content" id="formUpdateTodo">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateTodoModalLabel">Update todo</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="idUpdateTodo" id="idUpdateTodo" />
+            <input
+              type="text"
+              name="todoTextUpdate"
+              class="form-control"
+              id="todoTextUpdate"
+              placeholder="Fill Todo here"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End: Modal update -->
+
     <!-- Start: Form Search -->
     <div class="container my-5">
       <form id="form-search">
@@ -138,56 +181,13 @@
         </div>
       </form>
     </div>
+    <!-- End: Form Search -->
 
     <!-- Start: ListView TODO -->
     <div class="container">
       <ul class="list-group" id="todoList"></ul>
     </div>
     <!-- End: ListView TODO -->
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="updateForm"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <input
-              type="text"
-              name="todoText"
-              placeholder="Fill todoText here"
-              value=""
-              class="form-control"
-            />
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- End:FormUpdate TODO-->
 
     <!--Start:FormDelete TODO-->
     <!-- Modal -->

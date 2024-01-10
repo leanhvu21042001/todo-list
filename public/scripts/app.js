@@ -20,7 +20,9 @@ const createTodoElements = (todoList = []) => {
       <button class="btn btn-danger toDelete" data-id="${todo.id}" data-name=${
       todo.content
     }>Delete</button>
-      <button class="btn btn-warning" data-id="${todo.id}">Update</button>
+      <button class="btn btn-warning modalUpdateTodo" data-id="${
+        todo.id
+      }">Update</button>
     </div>
   </li>`;
   });
@@ -33,7 +35,7 @@ const createTodoElements = (todoList = []) => {
  * @param {string} content
  * @returns
  */
-const createTodo = (content = "") => {
+const createTodo = (content = "", isMarked = false) => {
   // throw error if content empty
   if (!content && !content?.length) {
     throw new Error("Can not add todo without content");
@@ -42,7 +44,7 @@ const createTodo = (content = "") => {
   return {
     id: Date.now(),
     content,
-    isMarked: false,
+    isMarked,
     createdAt: Date.now().toString(),
   };
 };
@@ -58,6 +60,33 @@ const renderTodoElements = (elements = "") => {
   // }
 
   document.querySelector("#todoList").innerHTML = elements;
+};
+
+/**
+ *
+ * @param {BigInteger} id
+ * @param {String} content
+ * @param {Boolean} isMarked
+ * @param {Array} todoList
+ * @returns
+ */
+const updateTodo = (id, content = "", isMarked, todoList = []) => {
+  const todos = [...todoList];
+
+  // find index of todo by id
+  const indexTodoUpdate = todos.findIndex(
+    (todo) => Number(todo.id) === Number(id)
+  );
+
+  // update if exists or throw error if not
+  if (todos[indexTodoUpdate]) {
+    const newTodo = createTodo(content, isMarked);
+    todos[indexTodoUpdate] = newTodo;
+  } else {
+    throw new Error("Todo not found");
+  }
+
+  return todos;
 };
 
 /**
@@ -92,6 +121,57 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   renderTodoElements(elements);
 });
 
+// ################ Handle: update todo ################ //
+const modalUpdateTodo = new bootstrap.Modal(
+  document.querySelector("#modalUpdateTodo"),
+  {
+    keyboard: false,
+  }
+);
+// show modal and set data for form value
+document.querySelector("#todoList").addEventListener("click", (event) => {
+  const { target } = event;
+  const isUpdateTodo = target.classList.value.includes("modalUpdateTodo");
+
+  // if click on button delete
+  if (isUpdateTodo) {
+    // get id and find todo
+    const idUpdateTodo = event.target.dataset.id;
+    const todoFound = todoList.find(
+      (todo) => Number(todo.id) === Number(idUpdateTodo)
+    );
+
+    // set data for form delete
+    document.querySelector("#idUpdateTodo").value = idUpdateTodo;
+    document.querySelector("#todoTextUpdate").value = todoFound.content;
+
+    // show modal delete
+    modalUpdateTodo.show();
+  }
+});
+
+document
+  .querySelector("#formUpdateTodo")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // get data from form delete
+    const formData = new FormData(event.target);
+    const idUpdateTodo = formData.get("idUpdateTodo");
+    const todoTextUpdate = formData.get("todoTextUpdate");
+
+    // update todo and pass new data for todoList
+    todoList = updateTodo(idUpdateTodo, todoTextUpdate, false, todoList);
+
+    // reset form and hide modal
+    event.target.reset();
+    modalUpdateTodo.hide();
+
+    // render new todoList to UI.
+    const elements = createTodoElements(todoList);
+    renderTodoElements(elements);
+  });
+
 const deleteModal = new bootstrap.Modal(document.getElementById("toDelete"), {
   keyboard: false,
 });
@@ -100,13 +180,15 @@ const deleteModal = new bootstrap.Modal(document.getElementById("toDelete"), {
 document.getElementById("todoList").addEventListener("click", function (event) {
   // Kiểm tra xem phần tử được click có class .toDelete không
   if (event.target.classList.contains("toDelete")) {
-    deleteModal.show();
     let id = event.target.dataset.id;
     let name = event.target.dataset.name;
+
     document.querySelector("#idToDelete").value = id;
     document.querySelector(
       "#deleteModalTitle"
     ).innerHTML = `<h3 class="text-center">Do you really want to delete Todo <strong class="text-danger fw-bold"> ${name}</strong>?</h3>`;
+
+    deleteModal.show();
   }
 });
 
@@ -115,8 +197,10 @@ document
   .addEventListener("click", function (event) {
     const idDelete = document.querySelector("#idToDelete").value;
     todoList = removeTodo(idDelete, todoList);
+
     const elements = createTodoElements(todoList);
     renderTodoElements(elements);
+
     deleteModal.hide();
   });
 
