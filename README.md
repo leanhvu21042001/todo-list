@@ -16,7 +16,7 @@
 - [x] Delete todo
 - [x] Update todo
 - [x] Render todo
-- Search todo
-- [ ] Mark todo is done
-- Soft by date todo
-- Filter by done or not marked
+- [x] Search todo
+- [x] Mark todo is done
+- [x] Soft by date todo
+- [x] Filter by done or not marked
