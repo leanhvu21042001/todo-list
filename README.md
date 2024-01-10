@@ -1,21 +1,22 @@
 # Todo List
 
 ## Teachs
+
 - html, css, javascript, bootstrap, font-awesome.
 
 ## UI
-- FormAdd todo
-- ListView todo
+
+- [x] FormAdd todo
+- [x] ListView todo
 - PopupUpdate todo
 
 ## Feature
 
-- Add todo
+- [x] Add todo
 - Delete todo
 - Update todo
-- Render todo
+- [ ] Render todo
 - Search todo
 - Mark todo is done
 - Soft by date todo
-- Filter by done or not marked 
-
+- Filter by done or not marked
