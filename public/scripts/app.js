@@ -71,7 +71,7 @@ const renderTodoElements = (elements = "") => {
 const updateTodo = (id, content = "", isMarked, todoList = []) => {
   const todos = [...todoList];
 
-  // fin index of todo by id
+  // find index of todo by id
   const indexTodoUpdate = todos.findIndex(
     (todo) => Number(todo.id) === Number(id)
   );
