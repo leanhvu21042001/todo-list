@@ -15,7 +15,7 @@
 - [x] Add todo
 - Delete todo
 - Update todo
-- [ ] Render todo
+- [x] Render todo
 - Search todo
 - Mark todo is done
 - Soft by date todo
