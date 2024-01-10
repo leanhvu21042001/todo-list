@@ -28,7 +28,7 @@
           type="button"
           class="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#modalAddNewTodo"
           id="addBtn"
         >
           Add
@@ -37,9 +37,9 @@
       <form id="formAdd">
         <div
           class="modal fade"
-          id="exampleModal"
+          id="modalAddNewTodo"
           tabindex="-1"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="modalAddNewTodoLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog">
@@ -82,6 +82,50 @@
       </form>
     </div>
 
+    <!-- Start: Modal update -->
+    <div
+      class="modal fade"
+      id="modalUpdateTodo"
+      tabindex="-1"
+      aria-labelledby="modalUpdateTodoLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <form class="modal-content" id="formUpdateTodo">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateTodoModalLabel">Update todo</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="idUpdateTodo" id="idUpdateTodo" />
+            <input
+              type="text"
+              name="todoTextUpdate"
+              class="form-control"
+              id="todoTextUpdate"
+              placeholder="Fill Todo here"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End: Modal update -->
+
     <!-- Start: Form Search -->
     <div class="container my-5">
       <form id="form-search">
@@ -120,7 +164,7 @@
         </div>
       </form>
     </div>
-    <!-- Start: Form Search -->
+    <!-- End: Form Search -->
 
     <!-- Start: ListView TODO -->
     <div class="container">
@@ -128,11 +172,11 @@
     </div>
     <!-- End: ListView TODO -->
 
-    <script src="./public/scripts/app.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script defer src="./public/scripts/app.js"></script>
   </body>
 </html>
