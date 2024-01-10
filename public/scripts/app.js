@@ -17,7 +17,9 @@ const createTodoElements = (todoList = []) => {
         type="checkbox"
         ${todo.isMarked ? "checked" : ""}
       />
-      <button class="btn btn-danger" data-id="${todo.id}">Delete</button>
+      <button class="btn btn-danger toDelete" data-id="${
+        todo.id
+      }"  data-bs-toggle="modal" data-bs-target="#toDelete">Delete</button>
       <button class="btn btn-warning" data-id="${todo.id}">Update</button>
     </div>
   </li>`;
@@ -51,9 +53,9 @@ const createTodo = (content = "") => {
  */
 const renderTodoElements = (elements = "") => {
   // throw error if elements empty
-  if (!elements && !elements?.length) {
-    throw new Error("Can not render todos without elements");
-  }
+  // if (!elements && !elements?.length) {
+  //   throw new Error("Can not render todos without elements");
+  // }
 
   document.querySelector("#todoList").innerHTML = elements;
 };
@@ -79,7 +81,7 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   const formData = new FormData(event.target);
   const todoText = formData.get("todoText");
 
-  // push new todo to todoList
+  // push new todo to todoLis
   todoList = [...todoList, createTodo(todoText)];
 
   // reset form data
@@ -89,6 +91,20 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   const elements = createTodoElements(todoList);
   renderTodoElements(elements);
 });
+
+var myModal = new bootstrap.Modal(document.getElementById("toDelete"), {
+  keyboard: false,
+});
+document
+  .querySelector("#deleteBtn")
+  .addEventListener("click", function (event) {
+    const idDelete = document.querySelector(".toDelete").getAttribute('data-id');
+    const newList = removeTodo(idDelete, todoList);
+    const elements = createTodoElements(newList);
+    console.log(elements)
+    renderTodoElements(elements);
+    myModal.hide();
+  });
 
 // ################ init render ################ //
 renderTodoElements("");
