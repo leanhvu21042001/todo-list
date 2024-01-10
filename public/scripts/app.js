@@ -73,7 +73,7 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   todoList = [...todoList, createTodo(todoText)];
 
   // reset form data
-  // event.target.reset();
+  event.target.reset();
 
   // render new todoList to UI.
   const elements = createTodoElements(todoList);
