@@ -12,9 +12,10 @@ const createTodoElements = (todoList = []) => {
     <p class="m-0">${todo.content}</p>
     <div class="d-flex gap-4">
       <input
-        class="form-check-input"
+        class="form-check-input markTodo"
         style="height: 2rem; width: 2rem; cursor: pointer"
         type="checkbox"
+        data-id="${todo.id}"
         ${todo.isMarked ? "checked" : ""}
       />
       <button class="btn btn-danger toDelete" data-id="${todo.id}" data-name=${
@@ -172,6 +173,7 @@ document
     renderTodoElements(elements);
   });
 
+// ################ Handle: delete todo ################ //
 const deleteModal = new bootstrap.Modal(document.getElementById("toDelete"), {
   keyboard: false,
 });
@@ -203,6 +205,32 @@ document
 
     deleteModal.hide();
   });
+
+// ################ Handle: toggle mark todo ################ //
+document.querySelector("#todoList").addEventListener("click", (event) => {
+  const { target } = event;
+  const isMarkTodo = target.classList.value.includes("markTodo");
+
+  if (isMarkTodo) {
+    // get id and find todo
+    const idMarkTodo = event.target.dataset.id;
+
+    const todoFound = todoList.find(
+      (todo) => Number(todo.id) === Number(idMarkTodo)
+    );
+
+    todoList = updateTodo(
+      idMarkTodo,
+      todoFound.content,
+      !todoFound.isMarked, // for toggle isMarked todo
+      todoList
+    );
+
+    // render new todoList to UI.
+    const elements = createTodoElements(todoList);
+    renderTodoElements(elements);
+  }
+});
 
 // ################ init render ################ //
 renderTodoElements("");
