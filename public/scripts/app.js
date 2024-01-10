@@ -17,7 +17,9 @@ const createTodoElements = (todoList = []) => {
         type="checkbox"
         ${todo.isMarked ? "checked" : ""}
       />
-      <button class="btn btn-danger" data-id="${todo.id}">Delete</button>
+      <button class="btn btn-danger toDelete" data-id="${todo.id}" data-name=${
+      todo.content
+    }>Delete</button>
       <button class="btn btn-warning" data-id="${todo.id}">Update</button>
     </div>
   </li>`;
@@ -51,12 +53,22 @@ const createTodo = (content = "") => {
  */
 const renderTodoElements = (elements = "") => {
   // throw error if elements empty
-  if (!elements && !elements?.length) {
-    throw new Error("Can not render todos without elements");
-  }
+  // if (!elements && !elements?.length) {
+  //   throw new Error("Can not render todos without elements");
+  // }
 
   document.querySelector("#todoList").innerHTML = elements;
 };
+
+/**
+ *
+ * @param {string} id
+ * @param {Array} todos
+ * @returns
+ */
+function removeTodo(id, todos = []) {
+  return todos.filter((todo) => Number(todo.id) !== Number(id));
+}
 
 // ################ Global variables ################ //
 let todoList = [];
@@ -79,6 +91,34 @@ document.querySelector("#formAdd").addEventListener("submit", function (event) {
   const elements = createTodoElements(todoList);
   renderTodoElements(elements);
 });
+
+const deleteModal = new bootstrap.Modal(document.getElementById("toDelete"), {
+  keyboard: false,
+});
+
+// Thêm sự kiện lắng nghe cho phần tử cha (container)
+document.getElementById("todoList").addEventListener("click", function (event) {
+  // Kiểm tra xem phần tử được click có class .toDelete không
+  if (event.target.classList.contains("toDelete")) {
+    deleteModal.show();
+    let id = event.target.dataset.id;
+    let name = event.target.dataset.name;
+    document.querySelector("#idToDelete").value = id;
+    document.querySelector(
+      "#deleteModalTitle"
+    ).innerHTML = `<h3 class="text-center">Do you really want to delete Todo <strong class="text-danger fw-bold"> ${name}</strong>?</h3>`;
+  }
+});
+
+document
+  .querySelector("#deleteBtn")
+  .addEventListener("click", function (event) {
+    const idDelete = document.querySelector("#idToDelete").value;
+    todoList = removeTodo(idDelete, todoList);
+    const elements = createTodoElements(todoList);
+    renderTodoElements(elements);
+    deleteModal.hide();
+  });
 
 // ################ init render ################ //
 renderTodoElements("");
